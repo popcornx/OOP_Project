@@ -15,7 +15,7 @@ import java.time.format.DateTimeFormatter;
 public final class OWMReader {
 
     private OWMReader(){};
-    public static Forecast readOSMFile(String fileName, String city) throws IOException, SAXException {
+    public static Forecast readOWMFile(String fileName, String city) throws IOException, SAXException {
         XMLReader r = XMLReaderFactory.createXMLReader();
         Forecast.Builder bf = new Forecast.Builder(city);
         r.setContentHandler(new DefaultHandler(){
@@ -36,23 +36,25 @@ public final class OWMReader {
                         bw.addID(atts.getValue("var"));
                         break;
                     case "precipitation":
-                        bw.addPreci(Double.parseDouble(atts.getValue("value")));
+                        if(atts.getLength() != 0) {
+                            bw.addPreci(Double.parseDouble(atts.getValue("value")));
+                        }
                         break;
-                    case "windSpeed":
+                    /*case "windSpeed":
                         bw.addWind(Double.parseDouble(atts.getValue("mps")));
-                        break;
+                        break;*/
                     case "temperature":
                         bw.addTemp(Double.parseDouble(atts.getValue("value")));
                         break;
-                    case "pressure":
+                    /*case "pressure":
                         bw.addPress(Double.parseDouble(atts.getValue("value")));
-                        break;
-                    case "humidity":
+                        break;*/
+                    /*case "humidity":
                         bw.addHumidity(Double.parseDouble(atts.getValue("value")));
-                        break;
-                    case "clouds":
+                        break;*/
+                    /*case "clouds":
                         bw.addCloud(Double.parseDouble(atts.getValue("all")));
-                        break;
+                        break;*/
                 }
             }
 
