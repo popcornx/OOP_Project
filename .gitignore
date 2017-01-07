@@ -4,3 +4,4 @@ out/
 bin/
 .project
 .classpath
+data/
