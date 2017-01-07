@@ -24,5 +24,23 @@ public final class Forecast {
 	public String getCity() {
 		return city;
 	}
-	
+
+	public static class Builder{
+
+		String city;
+		List<Weather> weather;
+
+		public Builder(String city){
+			this.city = city;
+			weather = new ArrayList<Weather>();
+		}
+
+		public void addWeather(Weather w){
+			weather.add(w);
+		}
+
+		public Forecast build(){
+			return new Forecast(weather, city);
+		}
+	}
 }
