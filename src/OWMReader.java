@@ -10,7 +10,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 /**
- * @author Lorenz Rasch
+ * @author Lorenz Rasch & Nicole Scheffel
  */
 public final class OWMReader {
 
