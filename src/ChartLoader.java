@@ -37,6 +37,7 @@ public class ChartLoader {
 	        new BarChart<String,Number>(xAxis,yAxis);
 	    barChart.setTitle("Precipitation Forecast");	    	   
 	    barChart.getData().add(series);
+	    barChart.setLegendVisible(false);
 	    
 	    for(Node n:barChart.lookupAll(".default-color0.chart-bar")) {
             n.setStyle("-fx-bar-fill: blue;");
@@ -63,7 +64,7 @@ public class ChartLoader {
         final LineChart<String,Number> lineChart = 
             new LineChart<String,Number>(xAxis,yAxis);
         lineChart.setTitle("Temperature Forecast");
-        
+	    lineChart.setLegendVisible(false);
 	    lineChart.getData().add(series);
 		
 		return lineChart;
