@@ -15,6 +15,7 @@ import java.time.format.DateTimeFormatter;
 public final class OWMReader {
 
     private OWMReader(){};
+
     public static Forecast readOWMFile(String fileName, String city) throws IOException, SAXException {
         XMLReader r = XMLReaderFactory.createXMLReader();
         Forecast.Builder bf = new Forecast.Builder(city);
