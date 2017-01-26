@@ -21,14 +21,15 @@ import java.util.List;
 
 public class Main extends Application {
 
+	private Forecast f;
+	private final static List cityList = Arrays.asList(OWMCity.values());
+
 	@Override public void start(Stage stage) throws Exception{
 		
 		stage.setTitle("Weather Forecast");
 		
     	BorderPane root = new BorderPane();
     	root.setBottom(new Label("Created by Lorenz Rasch & Nicole Scheffel"));
-    	
-    	Forecast f = OWMReader.readOWMFile(getClass().getResource("/forecast.xml").getFile(), "Bern");
     	
     	//Center
     	FlowPane flowPane = new FlowPane();
@@ -47,9 +48,7 @@ public class Main extends Application {
     	root.setTop(hboxTop);
         hboxTop.setAlignment(Pos.CENTER);
 
-		List list = Arrays.asList(OWMCity.values());
-
-		ChoiceBox<String> choiceBox = new ChoiceBox<String>(FXCollections.observableArrayList(list));
+		ChoiceBox<String> choiceBox = new ChoiceBox<String>(FXCollections.observableArrayList(cityList));
         //Set a default value
         choiceBox.setValue("Bern");
         
