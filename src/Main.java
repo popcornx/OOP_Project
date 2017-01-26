@@ -11,6 +11,10 @@ import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 
+import java.util.Arrays;
+import java.util.EnumSet;
+import java.util.List;
+
 /**
  * @author Lorenz Rasch & Nicole Scheffel
  */
@@ -42,10 +46,10 @@ public class Main extends Application {
     	HBox hboxTop = new HBox();
     	root.setTop(hboxTop);
         hboxTop.setAlignment(Pos.CENTER);
-    	
-    	ChoiceBox<String> choiceBox = new ChoiceBox<String>(FXCollections.observableArrayList(
-    			"Bern", "Biel", "Basel", "Zuerich", "Genf")
-    	);
+
+		List list = Arrays.asList(OWMCity.values());
+
+		ChoiceBox<String> choiceBox = new ChoiceBox<String>(FXCollections.observableArrayList(list));
         //Set a default value
         choiceBox.setValue("Bern");
         
