@@ -15,20 +15,26 @@ import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 
+import java.util.Arrays;
+import java.util.EnumSet;
+import java.util.List;
+
 /**
  * @author Lorenz Rasch & Nicole Scheffel
  */
 
 public class Main extends Application {
 
+	private Forecast f;
+	private final static List<OWMCity> cityList = Arrays.asList(OWMCity.values());
+
 	@Override public void start(Stage stage) throws Exception{
 		
 		stage.setTitle("Weather Forecast");
 		
     	BorderPane root = new BorderPane();
+
         Scene scene  = new Scene(root,1000,600);
-        
-    	Forecast f = OWMReader.readOWMFile(getClass().getResource("/forecast.xml").getFile(), "Bern");
     	
     	//Bottom
     	root.setBottom(new Label("Created by Lorenz Rasch & Nicole Scheffel"));
@@ -40,6 +46,7 @@ public class Main extends Application {
         sc.setPrefHeight(50);
         sc.setMax(100); 
 */        
+
     	//Center
     	FlowPane flowPane = new FlowPane();
     	root.setCenter(flowPane);
@@ -55,11 +62,11 @@ public class Main extends Application {
     	flowPane.getChildren().add(lineChart);
     	
     	//TableView Center
-    	final TableView table = new TableView();
+    	final TableView<String> table = new TableView<String>();
     	table.setEditable(false);
     	 
-        TableColumn description = new TableColumn("Parameter");
-        TableColumn number = new TableColumn("Amount/Number");
+        TableColumn<String, String> description = new TableColumn<String, String>("Parameter");
+        TableColumn<String, String> number = new TableColumn<String, String>("Amount/Number");
         description.prefWidthProperty().bind(table.widthProperty().divide(2));
         number.prefWidthProperty().bind(table.widthProperty().divide(2));
          
@@ -71,13 +78,10 @@ public class Main extends Application {
     	HBox hboxTop = new HBox();
     	root.setTop(hboxTop);
         hboxTop.setAlignment(Pos.CENTER);
-        
-    	//ChoiceBox Top
-    	ChoiceBox<String> choiceBox = new ChoiceBox<String>(FXCollections.observableArrayList(
-    			"Bern", "Biel", "Basel", "Zuerich", "Genf", "Luzern")
-    	);
+
+		ChoiceBox<OWMCity> choiceBox = new ChoiceBox<OWMCity>(FXCollections.observableArrayList(cityList));
         //Set a default value
-        choiceBox.setValue("Bern");
+        choiceBox.setValue(OWMCity.BERN);
         hboxTop.getChildren().add(choiceBox);
         
         stage.setScene(scene);
