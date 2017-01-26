@@ -57,7 +57,7 @@ public class ChartLoader {
 	    	list.add(new XYChart.Data<String, Number>(f.getWeather().get(i).getTime().toString(), f.getWeather().get(i).getTemperature()));
 	    }
         
-        XYChart.Series<String, Number> series = new XYChart.Series<String, Number>();
+        XYChart.Series<String, Number> series = new XYChart.Series<String, Number>(FXCollections.observableArrayList(list));
 
 	    //creating the chart
         final LineChart<String,Number> lineChart = 
