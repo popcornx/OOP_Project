@@ -31,19 +31,16 @@ public class ChartLoader {
 		barChart.setTitle("Precipitation Forecast");
 	    barChart.setLegendVisible(false);
 	    
-		try {
-			//compiling list of data
-			List<XYChart.Data<String, Number>> list = new ArrayList<XYChart.Data<String, Number>>();
-			for (int i = 0; i < 8; i++) {
-				list.add(new XYChart.Data<String, Number>(f.getWeather().get(i).getTime().toString(), f.getWeather().get(i).getPrecipitation()));
-			}
-			XYChart.Series<String, Number> series = new XYChart.Series<String, Number>(FXCollections.observableArrayList(list));
+        //compiling list of data
+        List<XYChart.Data<String, Number>> list = new ArrayList<XYChart.Data<String, Number>>();
+        for (int i = 0; i < 8; i++) {
+            list.add(new XYChart.Data<String, Number>(f.getWeather().get(i).getTime().toString(), f.getWeather().get(i).getPrecipitation()));
+        }
+        XYChart.Series<String, Number> series = new XYChart.Series<String, Number>(FXCollections.observableArrayList(list));
 
-			//adding data
-			barChart.getData().add(series);
-		} //TODO exception handling
-		catch (NullPointerException e){}
-	    
+        //adding data
+        barChart.getData().add(series);
+
 	    for(Node n:barChart.lookupAll(".default-color0.chart-bar")) {
             n.setStyle("-fx-bar-fill: blue;");
         }
@@ -64,19 +61,16 @@ public class ChartLoader {
 		lineChart.setTitle("Temperature Forecast");
 	    lineChart.setLegendVisible(false);
 	    
-        try {
-			//compiling list of data
-			List<XYChart.Data<String, Number>> list = new ArrayList<XYChart.Data<String, Number>>();
-			for (int i = 0; i < 8; i++) {
-				list.add(new XYChart.Data<String, Number>(f.getWeather().get(i).getTime().toString(), f.getWeather().get(i).getTemperature()));
-			}
-			XYChart.Series<String, Number> series = new XYChart.Series<String, Number>(FXCollections.observableArrayList(list));
+        //compiling list of data
+        List<XYChart.Data<String, Number>> list = new ArrayList<XYChart.Data<String, Number>>();
+        for (int i = 0; i < 8; i++) {
+            list.add(new XYChart.Data<String, Number>(f.getWeather().get(i).getTime().toString(), f.getWeather().get(i).getTemperature()));
+        }
+        XYChart.Series<String, Number> series = new XYChart.Series<String, Number>(FXCollections.observableArrayList(list));
 
-			//add data
-			lineChart.getData().add(series);
-		} //TODO exception handling
-		catch (NullPointerException e){}
-		
+        //add data
+        lineChart.getData().add(series);
+
 		return lineChart;
 	}
 }
