@@ -14,7 +14,9 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
+import org.xml.sax.SAXException;
 
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.EnumSet;
 import java.util.List;
@@ -25,14 +27,13 @@ import java.util.List;
 
 public class Main extends Application {
 
-	private Forecast f;
+	private static Forecast f;
 
-	@Override public void start(Stage stage) throws Exception{
-		// TODO change to one city, load at start of program
+	@Override public void start(Stage stage){
 		// TODO fill table
 		// TODO get icons
 		// TODO exception handling
-		stage.setTitle("Weather Forecast");
+		stage.setTitle("Weather Forecast for Bern");
 		
     	BorderPane root = new BorderPane();
 
@@ -40,6 +41,9 @@ public class Main extends Application {
     	
     	//Bottom
     	root.setBottom(new Label("Created by Lorenz Rasch & Nicole Scheffel"));
+
+    	//Top
+        root.setTop(new Label("Current Weather for Bern, Switzerland"));
 /*  	
    		final ScrollBar sc = new ScrollBar();
         sc.setLayoutX(scene.getWidth()-sc.getWidth());
@@ -75,17 +79,24 @@ public class Main extends Application {
         table.getColumns().addAll(description, number);
     	
         flowPane.getChildren().add(table);
-
-    	//Top
-    	HBox hboxTop = new HBox();
-    	root.setTop(hboxTop);
-        hboxTop.setAlignment(Pos.CENTER);
         
         stage.setScene(scene);
         stage.show();
 	}
 
     public static void main(String[] args) {
+        try {
+            OWMLoader.loadOWMFile(OWMConstants.BERN);
+        } catch (IOException e) {
+            // Problems loading File
+            System.out.println("Failed loading file!");
+        }
+        try {
+            f = OWMReader.readOWMFile(Main.class.getResource("/" + OWMConstants.BERN + ".xml").getFile(), "Bern");
+        } catch (Exception e) {
+            // Problems reading file
+            System.out.println("Failed reading file!");
+        }
         launch(args);
     }
 }
