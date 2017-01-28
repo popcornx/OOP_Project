@@ -12,9 +12,12 @@ import javafx.scene.layout.FlowPane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-// TODO javadoc
 /**
  * @author Lorenz Rasch & Nicole Scheffel
+ */
+
+/**
+ * Contains GUI for weather forecast dashboard.
  */
 
 public class Main extends Application {
@@ -23,7 +26,6 @@ public class Main extends Application {
 
 	@Override public void start(Stage stage){
 		// TODO fill table
-		// TODO get icons
 		// TODO exception handling
 		stage.setTitle("Weather Forecast for Bern");
 		
@@ -90,6 +92,11 @@ public class Main extends Application {
         stage.show();
 	}
 
+    /**
+     * Recalls data from openweathermap.org and reads it.
+     * Visualizes weather forecast data on a dashboard.
+     * @param args Unused.
+     */
     public static void main(String[] args) {
         try {
             OWMLoader.loadOWMFile(OWMConstants.BERN);

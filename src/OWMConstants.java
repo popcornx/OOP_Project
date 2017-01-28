@@ -1,8 +1,11 @@
-import java.util.HashMap;
-import java.util.Map;
-//TODO javdoc
 /**
  * @author Lorenz Rasch
+ */
+
+/**
+ * Contains the following data:
+ * API key and URL that are used by OWMLoader to recall data.
+ * City code that is used by the forecast object.
  */
 public interface OWMConstants {
 

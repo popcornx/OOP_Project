@@ -8,12 +8,18 @@ import org.xml.sax.helpers.XMLReaderFactory;
 import java.io.*;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-//TODO javadoc
 /**
  * @author Lorenz Rasch & Nicole Scheffel
  */
+
 public final class OWMReader {
 
+    /**
+     * Reads the forecast file that was recalled by OWMLoader.
+     * @exception IOException On input error.
+     * @exception SAXException Error from either the XML parser or the application.
+     */
+	
     private OWMReader(){};
 
     public static Forecast readOWMFile(String fileName, String city) throws IOException, SAXException {

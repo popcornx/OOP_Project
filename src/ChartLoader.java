@@ -9,7 +9,6 @@ import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.LineChart;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
-//TODO javadoc
 /**
  * @author Lorenz Rasch & Nicole Scheffel
  */
@@ -18,6 +17,13 @@ public class ChartLoader {
 	
 	private ChartLoader(){};
 
+	/**
+	 * Creates a bar chart that visualizes precipitation data.
+	 * There must be a forecast object containing time and precipitation data.
+	 * @param f forecast object that contains weather data and a city code.
+	 * @return returns a bar chart that visualizes the weather forecast data. 
+	 */
+	
 	public static BarChart<String, Number> loadPercipitationChart(Forecast f){
 		//defining the axes
 	    final Axis<String> xAxis = new CategoryAxis();
@@ -51,6 +57,12 @@ public class ChartLoader {
 	    return barChart;
 	}
 	
+	/**
+	 * Creates a line chart that visualizes temperature data.
+	 * There must be a forecast object containing time and temperature data.
+	 * @param f forecast object that contains weather data and a city code.
+	 * @return returns a line chart that visualizes the weather forecast data.
+	 */
 	public static LineChart<String, Number> loadTemperatureChart(Forecast f){
 		 //defining the axes
         final CategoryAxis xAxis = new CategoryAxis();
