@@ -1,5 +1,5 @@
 import java.time.LocalDateTime;
-
+//TODO javadoc
 /**
  * @author Lorenz Rasch & Nicole Scheffel
  */
@@ -16,6 +16,7 @@ public final class Weather {
 	
 	//public Weather(double temperature, double pressure, LocalDateTime time, double humidity, double cloudiness, double wind, double precipitation, String id){
     public Weather(double temperature, LocalDateTime time, double precipitation, String id){
+    	// TODO check arguments
         this.temperature = temperature;
 		//this.pressure = pressure;
 		this.time = time;

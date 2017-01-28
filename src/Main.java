@@ -1,10 +1,7 @@
 import javafx.application.Application;
-import javafx.collections.FXCollections;
-import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.chart.BarChart;
 import javafx.scene.chart.LineChart;
-import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -12,13 +9,8 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.FlowPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.paint.Color;
 import javafx.stage.Stage;
-
-import java.util.Arrays;
-import java.util.List;
-
+// TODO javadoc
 /**
  * @author Lorenz Rasch & Nicole Scheffel
  */
@@ -26,10 +18,12 @@ import java.util.List;
 public class Main extends Application {
 
 	private Forecast f;
-	private final static List<OWMCity> cityList = Arrays.asList(OWMCity.values());
 
 	@Override public void start(Stage stage) throws Exception{
-		
+		// TODO change to one city, load at start of program
+		// TODO fill table
+		// TODO get icons
+		// TODO exception handling
 		stage.setTitle("Weather Forecast");
 		
     	BorderPane root = new BorderPane();
@@ -87,16 +81,6 @@ public class Main extends Application {
         
         //Add everything to the flowPane in the center
         flowPane.getChildren().addAll(barChart, table, lineChart, img);
-
-    	//Top
-    	HBox hboxTop = new HBox();
-    	root.setTop(hboxTop);
-        hboxTop.setAlignment(Pos.CENTER);
-        
-		ChoiceBox<OWMCity> choiceBox = new ChoiceBox<OWMCity>(FXCollections.observableArrayList(cityList));
-        //Set a default value
-        choiceBox.setValue(OWMCity.BERN);
-        hboxTop.getChildren().add(choiceBox);
         
         stage.setScene(scene);
         stage.show();

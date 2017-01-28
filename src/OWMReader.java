@@ -8,7 +8,7 @@ import org.xml.sax.helpers.XMLReaderFactory;
 import java.io.*;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-
+//TODO javadoc
 /**
  * @author Lorenz Rasch & Nicole Scheffel
  */
