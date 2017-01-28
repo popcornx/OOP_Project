@@ -83,7 +83,7 @@ public class Main extends Application {
     	root.setCenter(flowPane);
     	
     	//BarChart Center
-    	BarChart<String, Number> barChart = ChartLoader.loadPercipitationChart(f);
+    	BarChart<String, Number> barChart = ChartLoader.loadPrecipitationChart(f);
     	barChart.setPrefSize(500, 300);
     	barChart.setMinSize(400, 200);
     	barChart.setMaxSize(600, 400);
