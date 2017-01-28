@@ -1,7 +1,9 @@
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.scene.Scene;
 import javafx.scene.chart.BarChart;
 import javafx.scene.chart.LineChart;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -20,11 +22,38 @@ import java.io.IOException;
 public class Main extends Application {
 
 	private static Forecast f;
+	boolean error = false;
+	Alert alert = new Alert(Alert.AlertType.ERROR);
 
-	@Override public void start(Stage stage){
+	@Override
+    public void init(){
+        try {
+            OWMLoader.loadOWMFile(OWMConstants.BERN);
+        } catch (IOException e) {
+            error = true;
+            // Problems loading File
+            alert.setTitle("Error");
+            alert.setHeaderText("Failed loading file");
+            alert.setContentText("Error while loading the file from external source. You may not be connected to the internet!");
+        }
+        try {
+            f = OWMReader.readOWMFile(Main.class.getResource("/" + OWMConstants.BERN + ".xml").getFile(), "Bern");
+        } catch (Exception e) {
+            error = true;
+            // Problems reading file
+            alert.setTitle("Error");
+            alert.setHeaderText("Failed loading file");
+            alert.setContentText("Error while loading the file from disk.");
+        }
+    }
+
+    @Override
+    public void start(Stage stage){
+        if(error) {
+            alert.showAndWait();
+            Platform.exit();
+        }
 		// TODO fill table
-		// TODO get icons
-		// TODO exception handling
 		stage.setTitle("Weather Forecast for Bern");
 		
     	BorderPane root = new BorderPane();
@@ -35,6 +64,7 @@ public class Main extends Application {
     	root.setBottom(new Label("Created by Lorenz Rasch & Nicole Scheffel"));
 
     	//Top
+        // TODO center text, make Text bigger
         root.setTop(new Label("Current Weather for Bern, Switzerland"));
 /*  	
    		final ScrollBar sc = new ScrollBar();
@@ -77,6 +107,7 @@ public class Main extends Application {
         table.getColumns().addAll(description, number);
 
         //Icon
+        //TODO center image in quadrant
         Image image = new Image ("http://openweathermap.org/img/w/" + f.getWeather().get(0).getId() + ".png");
         ImageView img = new ImageView();
         img.setImage(image);
@@ -91,18 +122,6 @@ public class Main extends Application {
 	}
 
     public static void main(String[] args) {
-        try {
-            OWMLoader.loadOWMFile(OWMConstants.BERN);
-        } catch (IOException e) {
-            // Problems loading File
-            System.out.println("Failed loading file!");
-        }
-        try {
-            f = OWMReader.readOWMFile(Main.class.getResource("/" + OWMConstants.BERN + ".xml").getFile(), "Bern");
-        } catch (Exception e) {
-            // Problems reading file
-            System.out.println("Failed reading file!");
-        }
         launch(args);
     }
 }
