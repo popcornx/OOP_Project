@@ -4,9 +4,9 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.nio.channels.Channels;
 import java.nio.channels.ReadableByteChannel;
-
+//TODO javadoc
 /**
- * @author Lorenz Rasch
+ * @author Lorenz Rasch & Nicole Scheffel
  */
 public class OWMLoader {
 

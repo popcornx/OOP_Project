@@ -18,7 +18,7 @@ import javafx.stage.Stage;
 import java.util.Arrays;
 import java.util.EnumSet;
 import java.util.List;
-
+// TODO javadoc
 /**
  * @author Lorenz Rasch & Nicole Scheffel
  */
@@ -29,7 +29,11 @@ public class Main extends Application {
 	private final static List<OWMCity> cityList = Arrays.asList(OWMCity.values());
 
 	@Override public void start(Stage stage) throws Exception{
-		
+		// TODO change to one city, load at start of program
+		// TODO remove OWMCity
+		// TODO fill table
+		// TODO get icons
+		// TODO exception handling
 		stage.setTitle("Weather Forecast");
 		
     	BorderPane root = new BorderPane();

@@ -9,7 +9,7 @@ import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.LineChart;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
-
+//TODO javadoc
 /**
  * @author Lorenz Rasch & Nicole Scheffel
  */
@@ -22,7 +22,7 @@ public class ChartLoader {
 		//defining the axes
 	    final Axis<String> xAxis = new CategoryAxis();
 	    final Axis<Number> yAxis = new NumberAxis();
-	    xAxis.setLabel("Date and Time");       
+	    xAxis.setLabel("Date and Time");
 	    yAxis.setLabel("Precipitation in mm");
 
 		//creating the chart
@@ -41,7 +41,7 @@ public class ChartLoader {
 
 			//adding data
 			barChart.getData().add(series);
-		}
+		} //TODO exception handling
 		catch (NullPointerException e){}
 	    
 	    for(Node n:barChart.lookupAll(".default-color0.chart-bar")) {
@@ -74,7 +74,7 @@ public class ChartLoader {
 
 			//add data
 			lineChart.getData().add(series);
-		}
+		} //TODO exception handling
 		catch (NullPointerException e){}
 		
 		return lineChart;
