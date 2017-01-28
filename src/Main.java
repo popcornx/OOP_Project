@@ -31,7 +31,7 @@ public class Main extends Application {
 	private static Forecast f;
 	private boolean readingError, loadingError = false;
 	private Alert readingAlert = new Alert(Alert.AlertType.ERROR);
-	private Alert loadingAlert = new Alert(Alert.AlertType.ERROR)
+	private Alert loadingAlert = new Alert(Alert.AlertType.ERROR);
 
 	@Override
     public void init(){
@@ -88,7 +88,7 @@ public class Main extends Application {
     	root.setCenter(flowPane);
     	
     	//BarChart Center
-    	BarChart<String, Number> barChart = ChartLoader.loadPercipitationChart(f);
+    	BarChart<String, Number> barChart = ChartLoader.loadPrecipitationChart(f);
     	barChart.setPrefSize(500, 300);
     	barChart.setMinSize(400, 200);
     	barChart.setMaxSize(600, 400);
@@ -116,7 +116,6 @@ public class Main extends Application {
         table.getColumns().addAll(description, number);
 
         //Icon
-        //TODO center image in quadrant
         hbox = new HBox();
         hbox.setPrefSize(500, 300);
         hbox.setMinSize(400, 200);

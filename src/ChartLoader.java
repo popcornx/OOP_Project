@@ -9,6 +9,7 @@ import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.LineChart;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
+
 /**
  * @author Lorenz Rasch & Nicole Scheffel
  */
@@ -24,13 +25,16 @@ public class ChartLoader {
 	 * @return returns a bar chart that visualizes the weather forecast data. 
 	 */
 	
-	public static BarChart<String, Number> loadPercipitationChart(Forecast f){
+	public static BarChart<String, Number> loadPrecipitationChart(Forecast f){
 		//defining the axes
 	    final Axis<String> xAxis = new CategoryAxis();
 	    final Axis<Number> yAxis = new NumberAxis();
-	    xAxis.setLabel("Date and Time");
+	    xAxis.setLabel("Time");
 	    yAxis.setLabel("Precipitation in mm");
-
+	  //  xAxis.setTickLabelRotation(60);
+	  //  xAxis.tickLabelFontProperty().set(Font.font(7));
+	    
+	    
 		//creating the chart
 		final BarChart<String,Number> barChart =
 				new BarChart<String,Number>(xAxis,yAxis);
@@ -39,8 +43,10 @@ public class ChartLoader {
 	    
         //compiling list of data
         List<XYChart.Data<String, Number>> list = new ArrayList<XYChart.Data<String, Number>>();
+        String time = new String();
         for (int i = 0; i < 8; i++) {
-            list.add(new XYChart.Data<String, Number>(f.getWeather().get(i).getTime().toString(), f.getWeather().get(i).getPrecipitation()));
+        	time = f.getWeather().get(i).getTime().toString();
+            list.add(new XYChart.Data<String, Number>(time.substring(11), f.getWeather().get(i).getPrecipitation()));
         }
         XYChart.Series<String, Number> series = new XYChart.Series<String, Number>(FXCollections.observableArrayList(list));
 
@@ -64,8 +70,8 @@ public class ChartLoader {
 		 //defining the axes
         final CategoryAxis xAxis = new CategoryAxis();
         final NumberAxis yAxis = new NumberAxis();
-        xAxis.setLabel("Date and Time");
-        yAxis.setLabel("Temperature in degree Celsius");
+        xAxis.setLabel("Time");
+        yAxis.setLabel("Temperature in °C");
 
 		//creating the chart
 		final LineChart<String,Number> lineChart =
@@ -75,8 +81,10 @@ public class ChartLoader {
 	    
         //compiling list of data
         List<XYChart.Data<String, Number>> list = new ArrayList<XYChart.Data<String, Number>>();
+        String time = new String();
         for (int i = 0; i < 8; i++) {
-            list.add(new XYChart.Data<String, Number>(f.getWeather().get(i).getTime().toString(), f.getWeather().get(i).getTemperature()));
+        	time = f.getWeather().get(i).getTime().toString();
+            list.add(new XYChart.Data<String, Number>(time.substring(11), f.getWeather().get(i).getTemperature()));
         }
         XYChart.Series<String, Number> series = new XYChart.Series<String, Number>(FXCollections.observableArrayList(list));
 
