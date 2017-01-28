@@ -3,10 +3,14 @@ import java.io.IOException;
 import java.net.URL;
 import java.nio.channels.Channels;
 import java.nio.channels.ReadableByteChannel;
-//TODO javadoc
 /**
  * @author Lorenz Rasch & Nicole Scheffel
  */
+
+/**
+ * Recalls the weather forecast data from openweathermap.org.
+ */
+
 public class OWMLoader {
 
     private OWMLoader(){};

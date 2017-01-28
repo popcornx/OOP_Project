@@ -1,17 +1,21 @@
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-// TODO javadoc
 /**
  * @author Lorenz Rasch & Nicole Scheffel
  */
-
 
 public final class Forecast {
 	
 	final List<Weather> weather;
 	final String city;
 	
+	/**
+	 * Creates a forecast object that contains all forecast data for the next 24 hours and the city code for the corresponding city
+	 * @param weather weather object that contains all forecast data from Openweathermap.org
+	 * @param city city code of the city Berne
+	 */
+
 	public Forecast(List<Weather> weather, String city){
 		this.weather = Collections.unmodifiableList(new ArrayList<Weather>(weather));
 		this.city = city;

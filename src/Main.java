@@ -14,21 +14,24 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-// TODO javadoc
 /**
  * @author Lorenz Rasch & Nicole Scheffel
+ */
+
+/**
+ * Contains GUI for weather forecast dashboard.
  */
 
 public class Main extends Application {
 
 	private static Forecast f;
 	private boolean readingError, loadingError = false;
-	private Alert readingAlert, loadingAlert = new Alert(Alert.AlertType.ERROR);
+	private Alert readingAlert = new Alert(Alert.AlertType.ERROR);
+	private Alert loadingAlert = new Alert(Alert.AlertType.ERROR)
 
 	@Override
     public void init(){
@@ -61,7 +64,8 @@ public class Main extends Application {
             readingAlert.showAndWait();
             Platform.exit();
         }
-		stage.setTitle("Weather Forecast");
+
+		stage.setTitle("Weather Forecast for Bern");
 		
     	BorderPane root = new BorderPane();
 
@@ -132,6 +136,11 @@ public class Main extends Application {
         stage.show();
 	}
 
+    /**
+     * Recalls data from openweathermap.org and reads it.
+     * Visualizes weather forecast data on a dashboard.
+     * @param args Unused.
+     */
     public static void main(String[] args) {
         launch(args);
     }

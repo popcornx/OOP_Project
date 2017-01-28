@@ -1,9 +1,12 @@
 import java.time.LocalDateTime;
-//TODO javadoc
 /**
  * @author Lorenz Rasch & Nicole Scheffel
  */
 
+/**
+ * Creates a weather object that contains all weather forecast data.
+ * Provides functions to get the values of temperature, pressure, time, humidity, cloudiness, wind, precipitation and id.
+ */
 public final class Weather {
 	final double temperature;  //temperature in Celsius
 	final double pressure;  //hpa
