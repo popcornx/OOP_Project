@@ -65,7 +65,7 @@ public class ChartLoader {
         final CategoryAxis xAxis = new CategoryAxis();
         final NumberAxis yAxis = new NumberAxis();
         xAxis.setLabel("Date and Time");
-        yAxis.setLabel("Temperature in degree Celsius");
+        yAxis.setLabel("Temperature in °C");
 
 		//creating the chart
 		final LineChart<String,Number> lineChart =

@@ -1,5 +1,4 @@
 import javafx.application.Application;
-import javafx.application.Platform;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -16,6 +15,7 @@ import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
+import org.xml.sax.SAXException;
 
 import java.io.IOException;
 /**
@@ -28,15 +28,22 @@ import java.io.IOException;
 
 public class Main extends Application {
 
+    public static final int BERN = 2661552;
+
 	private static Forecast f;
-	private boolean readingError, loadingError = false;
-	private Alert readingAlert = new Alert(Alert.AlertType.ERROR);
-	private Alert loadingAlert = new Alert(Alert.AlertType.ERROR)
+	private boolean loadingError = false;
+	private Alert loadingAlert = new Alert(Alert.AlertType.ERROR);
 
 	@Override
-    public void init(){
+    public void init() throws InterruptedException {
         try {
-            OWMLoader.loadOWMFile(OWMConstants.BERN);
+            f = OWMReader.readOWMFile(BERN, "Bern");
+        } catch (SAXException e) {
+            loadingError = true;
+            // Problems loading File
+            loadingAlert.setTitle("Error");
+            loadingAlert.setHeaderText("Failed reading file");
+            loadingAlert.setContentText("Error while reading the file!");
         } catch (IOException e) {
             loadingError = true;
             // Problems loading File
@@ -44,25 +51,13 @@ public class Main extends Application {
             loadingAlert.setHeaderText("Failed loading file");
             loadingAlert.setContentText("Error while loading the file from external source. You may not be connected to the internet!");
         }
-        try {
-            f = OWMReader.readOWMFile(Main.class.getResource("/" + OWMConstants.BERN + ".xml").getFile(), "Bern");
-        } catch (Exception e) {
-            readingError = true;
-            // Problems reading file
-            readingAlert.setTitle("Error");
-            readingAlert.setHeaderText("Failed loading file");
-            readingAlert.setContentText("Error while loading the file from disk. File may not exist!");
-        }
     }
 
     @Override
     public void start(Stage stage){
         if(loadingError) {
             loadingAlert.showAndWait();
-        }
-        if(readingError) {
-            readingAlert.showAndWait();
-            Platform.exit();
+            System.exit(0);
         }
 
 		stage.setTitle("Weather Forecast for Bern");
@@ -108,15 +103,15 @@ public class Main extends Application {
     	table.setMaxSize(600, 400);
 
         TableColumn<String, String> description = new TableColumn<String, String>("Parameter");
-        TableColumn<String, String> number = new TableColumn<String, String>("Amount/Number");
+        TableColumn<String, String> value = new TableColumn<String, String>("Amount/Number");
+
         //Change width
         description.prefWidthProperty().bind(table.widthProperty().divide(2));
-        number.prefWidthProperty().bind(table.widthProperty().divide(2));
+        value.prefWidthProperty().bind(table.widthProperty().divide(2));
          
-        table.getColumns().addAll(description, number);
+        table.getColumns().addAll(description, value);
 
         //Icon
-        //TODO center image in quadrant
         hbox = new HBox();
         hbox.setPrefSize(500, 300);
         hbox.setMinSize(400, 200);

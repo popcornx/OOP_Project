@@ -6,6 +6,8 @@ import org.xml.sax.helpers.DefaultHandler;
 import org.xml.sax.helpers.XMLReaderFactory;
 
 import java.io.*;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 /**
@@ -13,6 +15,9 @@ import java.time.format.DateTimeFormatter;
  */
 
 public final class OWMReader {
+
+    private static final String APIKEY = "7b6accdf1ca7788a21c89b2a3f0e8e76";
+    private static final String URL = "http://api.openweathermap.org/data/2.5/forecast?mode=xml&units=metric&appid=" + APIKEY + "&id=";
 
     /**
      * Reads the forecast file that was recalled by OWMLoader.
@@ -22,7 +27,7 @@ public final class OWMReader {
 	
     private OWMReader(){};
 
-    public static Forecast readOWMFile(String fileName, String city) throws IOException, SAXException {
+    public static Forecast readOWMFile(int cityID, String city) throws IOException, SAXException {
         XMLReader r = XMLReaderFactory.createXMLReader();
         Forecast.Builder bf = new Forecast.Builder(city);
         r.setContentHandler(new DefaultHandler(){
@@ -74,9 +79,7 @@ public final class OWMReader {
                 }
             }
         });
-        try (InputStream i = new FileInputStream(fileName)) {
-            r.parse(new InputSource(i));
-        }
+        r.parse(new InputSource(new URL(URL + cityID).openStream()));
         return bf.build();
     }
 }
