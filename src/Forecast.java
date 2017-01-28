@@ -6,9 +6,11 @@ import java.util.List;
  */
 
 public final class Forecast {
+
+	private final static int LIMIT = 8;
 	
-	final List<Weather> weather;
-	final String city;
+	private final List<Weather> weather;
+	private final String city;
 	
 	/**
 	 * Creates a forecast object that contains all forecast data for the next 24 hours and the city code for the corresponding city
@@ -44,7 +46,7 @@ public final class Forecast {
 		}
 
 		public Forecast build(){
-			return new Forecast(weather, city);
+			return new Forecast(weather.subList(0,LIMIT), city);
 		}
 	}
 }
