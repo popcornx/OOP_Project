@@ -13,6 +13,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
@@ -73,14 +74,6 @@ public class Main extends Application {
         hbox.setAlignment(Pos.CENTER);
         hbox.getChildren().add(top);
         root.setTop(hbox);
-/*  	
-   		final ScrollBar sc = new ScrollBar();
-        sc.setLayoutX(scene.getWidth()-sc.getWidth());
-        sc.setMin(0);
-        sc.setOrientation(Orientation.VERTICAL);
-        sc.setPrefHeight(50);
-        sc.setMax(100); 
-*/        
 
     	//Center
     	FlowPane flowPane = new FlowPane();
@@ -116,14 +109,20 @@ public class Main extends Application {
 
         //Icon
         //TODO center image in quadrant
+        hbox = new HBox();
+        hbox.setPrefSize(400, 300);
+        hbox.setMinSize(200, 200);
+        hbox.setMaxSize(400, 400);
+        hbox.setAlignment(Pos.CENTER);
         Image image = new Image ("http://openweathermap.org/img/w/" + f.getWeather().get(0).getId() + ".png");
         ImageView img = new ImageView();
         img.setImage(image);
         img.setPreserveRatio(true);
         img.setFitWidth(100);
+        hbox.getChildren().add(img);
         
         //Add everything to the flowPane in the center
-        flowPane.getChildren().addAll(barChart, table, lineChart, img);
+        flowPane.getChildren().addAll(barChart, table, lineChart, hbox);
         
         stage.setScene(scene);
         stage.show();
