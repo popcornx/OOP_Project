@@ -1,5 +1,3 @@
-import java.util.HashMap;
-import java.util.Map;
 //TODO javdoc
 /**
  * @author Lorenz Rasch

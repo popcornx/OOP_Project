@@ -41,21 +41,21 @@ public final class OWMReader {
                             bw.addPreci(Double.parseDouble(atts.getValue("value")));
                         }
                         break;
-                    /*case "windSpeed":
+                    case "windSpeed":
                         bw.addWind(Double.parseDouble(atts.getValue("mps")));
-                        break;*/
+                        break;
                     case "temperature":
                         bw.addTemp(Double.parseDouble(atts.getValue("value")));
                         break;
-                    /*case "pressure":
+                    case "pressure":
                         bw.addPress(Double.parseDouble(atts.getValue("value")));
-                        break;*/
-                    /*case "humidity":
+                        break;
+                    case "humidity":
                         bw.addHumidity(Double.parseDouble(atts.getValue("value")));
-                        break;*/
-                    /*case "clouds":
+                        break;
+                    case "clouds":
                         bw.addCloud(Double.parseDouble(atts.getValue("all")));
-                        break;*/
+                        break;
                 }
             }
 
