@@ -11,6 +11,7 @@ import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
 
 /**
+ * Class to create Charts from data.
  * @author Lorenz Rasch & Nicole Scheffel
  */
 
@@ -21,7 +22,7 @@ public class ChartLoader {
 	/**
 	 * Creates a bar chart that visualizes precipitation data.
 	 * There must be a forecast object containing time and precipitation data.
-	 * @param f forecast object that contains weather data and a city code.
+	 * @param f forecast object that contains weather data.
 	 * @return returns a bar chart that visualizes the weather forecast data. 
 	 */
 	
@@ -31,8 +32,6 @@ public class ChartLoader {
 	    final Axis<Number> yAxis = new NumberAxis();
 	    xAxis.setLabel("Time");
 	    yAxis.setLabel("Precipitation in mm");
-	  //  xAxis.setTickLabelRotation(60);
-	  //  xAxis.tickLabelFontProperty().set(Font.font(7));
 	    
 	    
 		//creating the chart
@@ -52,6 +51,7 @@ public class ChartLoader {
         //adding data
         barChart.getData().add(series);
 
+        //change color of bars
 	    for(Node n:barChart.lookupAll(".default-color0.chart-bar")) {
             n.setStyle("-fx-bar-fill: blue;");
         }
@@ -62,7 +62,7 @@ public class ChartLoader {
 	/**
 	 * Creates a line chart that visualizes temperature data.
 	 * There must be a forecast object containing time and temperature data.
-	 * @param f forecast object that contains weather data and a city code.
+	 * @param f forecast object that contains weather data.
 	 * @return returns a line chart that visualizes the weather forecast data.
 	 */
 	public static LineChart<String, Number> loadTemperatureChart(Forecast f){
@@ -70,7 +70,7 @@ public class ChartLoader {
         final CategoryAxis xAxis = new CategoryAxis();
         final NumberAxis yAxis = new NumberAxis();
         xAxis.setLabel("Time");
-        yAxis.setLabel("Temperature in °C");
+        yAxis.setLabel("Temperature in \u00BAC");
 
 		//creating the chart
 		final LineChart<String,Number> lineChart =

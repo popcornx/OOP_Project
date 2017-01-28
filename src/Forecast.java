@@ -2,6 +2,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 /**
+ * Weatherforecast for a city made up of multiple Weather objects.
  * @author Lorenz Rasch & Nicole Scheffel
  */
 
@@ -13,9 +14,9 @@ public final class Forecast {
 	private final String city;
 	
 	/**
-	 * Creates a forecast object that contains all forecast data for the next 24 hours and the city code for the corresponding city
-	 * @param weather weather object that contains all forecast data from Openweathermap.org
-	 * @param city city code of the city Berne
+	 * Creates a forecast object that contains all forecast data for the next 24 hours and the city name
+	 * @param weather weather object that contains all forecast data
+	 * @param city city code
 	 */
 
 	public Forecast(List<Weather> weather, String city){
@@ -31,6 +32,9 @@ public final class Forecast {
 		return city;
 	}
 
+    /**
+     * Builder class for the Forecast object.
+     */
 	public static class Builder{
 
 		String city;

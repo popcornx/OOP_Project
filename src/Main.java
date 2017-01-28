@@ -22,21 +22,27 @@ import javafx.stage.Stage;
 import org.xml.sax.SAXException;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-/**
- * @author Lorenz Rasch & Nicole Scheffel
- */
 
 /**
  * Contains GUI for weather forecast dashboard.
+ * @author Lorenz Rasch & Nicole Scheffel
  */
 
 public class Main extends Application {
 
-    public static final int ID = 2661552;
-    public static final String CITY = "Bern";
+    private static final int ID = 2661552;
+    private static final String CITY = "Bern";
+//    private static final int ID = 2661513;
+//    private static final String CITY = "Biel/Bienne";
+//    private static final int ID = 5128581;
+//    private static final String CITY = "New York City";
+//    private static final int ID = 3128760;
+//    private static final String CITY = "Barcelona";
+//    private static final int ID = 2147714	;
+//    private static final String CITY = "Sidney";
+
+    private static final int WIDTH = 1000;
+    private static final int HEIGHT = 700;
 
 	private static Forecast f;
 	private boolean loadingError = false;
@@ -72,7 +78,7 @@ public class Main extends Application {
 		
     	BorderPane root = new BorderPane();
 
-        Scene scene  = new Scene(root,1000,700);
+        Scene scene  = new Scene(root,WIDTH,HEIGHT);
     	
     	//Bottom
     	root.setBottom(new Label("Created by Lorenz Rasch & Nicole Scheffel"));
@@ -92,23 +98,28 @@ public class Main extends Application {
     	
     	//BarChart Center
     	BarChart<String, Number> barChart = ChartLoader.loadPrecipitationChart(f);
-    	barChart.setPrefSize(500, 300);
+    	barChart.setPrefSize(WIDTH/2, HEIGHT/2 - 50);
     	barChart.setMinSize(400, 200);
     	barChart.setMaxSize(600, 400);
 
     	//LineChart Center
     	LineChart<String, Number> lineChart = ChartLoader.loadTemperatureChart(f);
-    	lineChart.setPrefSize(500, 300);
+    	lineChart.setPrefSize(WIDTH/2, HEIGHT/2 - 50);
     	lineChart.setMinSize(400, 200);
     	lineChart.setMaxSize(600, 400);
 
     	//TableView Center
-        // TODO fill table
+        HBox tableBox = new HBox();
+        tableBox.setPrefSize(WIDTH/2, HEIGHT/2 - 50);
+        tableBox.setMinSize(400, 200);
+        tableBox.setMaxSize(600, 400);
+        tableBox.setPadding(new Insets(0,20,0,0));
+
     	final TableView<DataItem> table = new TableView<DataItem>();
+        table.setPrefSize(WIDTH/2, HEIGHT/2 - 50);
+        table.setMinSize(400, 200);
+        table.setMaxSize(600, 400);
     	table.setEditable(false);
-    	table.setPrefSize(500, 300);
-    	table.setMinSize(400, 200);
-    	table.setMaxSize(600, 400);
 
         TableColumn<DataItem, String> description = new TableColumn<DataItem, String>("Parameter");
         TableColumn<DataItem, String> value = new TableColumn<DataItem, String>("Amount/Number");
@@ -132,12 +143,13 @@ public class Main extends Application {
         //Change width
         description.prefWidthProperty().bind(table.widthProperty().divide(2));
         value.prefWidthProperty().bind(table.widthProperty().divide(2));
-         
+        table.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
         table.getColumns().addAll(description, value);
+        tableBox.getChildren().add(table);
 
         //Icon
         hbox = new HBox();
-        hbox.setPrefSize(500, 300);
+        hbox.setPrefSize(WIDTH/2, HEIGHT/2 - 50);
         hbox.setMinSize(400, 200);
         hbox.setMaxSize(600, 400);
         hbox.setAlignment(Pos.CENTER);
@@ -149,7 +161,7 @@ public class Main extends Application {
         hbox.getChildren().add(img);
         
         //Add everything to the flowPane in the center
-        flowPane.getChildren().addAll(barChart, table, lineChart, hbox);
+        flowPane.getChildren().addAll(barChart, tableBox, lineChart, hbox);
         
         stage.setScene(scene);
         stage.show();

@@ -1,11 +1,8 @@
 import java.time.LocalDateTime;
-/**
- * @author Lorenz Rasch & Nicole Scheffel
- */
 
 /**
- * Creates a weather object that contains all weather forecast data.
- * Provides functions to get the values of temperature, pressure, time, humidity, cloudiness, wind, precipitation and id.
+ * Class containing Weatherdata.
+ * @author Lorenz Rasch & Nicole Scheffel
  */
 public final class Weather {
 	final double temperature;  //temperature in Celsius
@@ -16,7 +13,18 @@ public final class Weather {
 	final double wind;  // m/s
 	final double precipitation; //= Niederschlag, volume in mm for the last 3 hours
 	final String id;  //id tag of weather icon
-	
+
+    /**
+     * Creates a weather object that contains all weather forecast data.
+     * @param temperature current temperature in celsius
+     * @param pressure atmospheric pressure in %
+     * @param time local time
+     * @param humidity humidity in %
+     * @param cloudiness cloudcoverage in %
+     * @param wind windspeed in m/s
+     * @param precipitation amount of precipitation in mm
+     * @param id identification of weather icon
+     */
 	public Weather(double temperature, double pressure, LocalDateTime time, double humidity, double cloudiness, double wind, double precipitation, String id){
         this.temperature = temperature;
 		this.pressure = pressure;
@@ -60,7 +68,10 @@ public final class Weather {
 	public String getId() {
 		return id;
 	}
-    
+
+    /**
+     * Builder class for Weather object.
+     */
 	public static class Builder{
 		double temperature = Double.MIN_VALUE;  //temperature in Celsius
 		double pressure = Integer.MIN_VALUE;  //hpa

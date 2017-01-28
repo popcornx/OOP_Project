@@ -8,6 +8,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 /**
+ * Class capable of reading XML files from openweathermap.org
  * @author Lorenz Rasch & Nicole Scheffel
  */
 
@@ -16,14 +17,14 @@ public final class OWMReader {
     private static final String APIKEY = "7b6accdf1ca7788a21c89b2a3f0e8e76";
     private static final String URL = "http://api.openweathermap.org/data/2.5/forecast?mode=xml&units=metric&appid=" + APIKEY + "&id=";
 
+    private OWMReader(){};
+
     /**
-     * Reads the forecast file that was recalled by OWMLoader.
+     * Loads and reads XML files from openweathermap.org
+     * @return Forecast object from the file
      * @exception IOException On input error.
      * @exception SAXException Error from either the XML parser or the application.
      */
-	
-    private OWMReader(){};
-
     public static Forecast readOWMFile(int cityID, String city) throws IOException, SAXException {
         XMLReader r = XMLReaderFactory.createXMLReader();
         Forecast.Builder bf = new Forecast.Builder(city);
