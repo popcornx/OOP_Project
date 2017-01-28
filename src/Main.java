@@ -1,5 +1,6 @@
 import javafx.application.Application;
 import javafx.application.Platform;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.chart.BarChart;
@@ -26,38 +27,40 @@ import java.io.IOException;
 public class Main extends Application {
 
 	private static Forecast f;
-	boolean error = false;
-	Alert alert = new Alert(Alert.AlertType.ERROR);
+	private boolean readingError, loadingError = false;
+	private Alert readingAlert, loadingAlert = new Alert(Alert.AlertType.ERROR);
 
 	@Override
     public void init(){
         try {
             OWMLoader.loadOWMFile(OWMConstants.BERN);
         } catch (IOException e) {
-            error = true;
+            loadingError = true;
             // Problems loading File
-            alert.setTitle("Error");
-            alert.setHeaderText("Failed loading file");
-            alert.setContentText("Error while loading the file from external source. You may not be connected to the internet!");
+            loadingAlert.setTitle("Error");
+            loadingAlert.setHeaderText("Failed loading file");
+            loadingAlert.setContentText("Error while loading the file from external source. You may not be connected to the internet!");
         }
         try {
             f = OWMReader.readOWMFile(Main.class.getResource("/" + OWMConstants.BERN + ".xml").getFile(), "Bern");
         } catch (Exception e) {
-            error = true;
+            readingError = true;
             // Problems reading file
-            alert.setTitle("Error");
-            alert.setHeaderText("Failed loading file");
-            alert.setContentText("Error while loading the file from disk.");
+            readingAlert.setTitle("Error");
+            readingAlert.setHeaderText("Failed loading file");
+            readingAlert.setContentText("Error while loading the file from disk. File may not exist!");
         }
     }
 
     @Override
     public void start(Stage stage){
-        if(error) {
-            alert.showAndWait();
+        if(loadingError) {
+            loadingAlert.showAndWait();
+        }
+        if(readingError) {
+            readingAlert.showAndWait();
             Platform.exit();
         }
-
 		stage.setTitle("Weather Forecast");
 		
     	BorderPane root = new BorderPane();
@@ -77,6 +80,7 @@ public class Main extends Application {
 
     	//Center
     	FlowPane flowPane = new FlowPane();
+    	flowPane.setPadding(new Insets(10, 0, 0, 0));
     	root.setCenter(flowPane);
     	
     	//BarChart Center
@@ -84,21 +88,21 @@ public class Main extends Application {
     	barChart.setPrefSize(500, 300);
     	barChart.setMinSize(400, 200);
     	barChart.setMaxSize(600, 400);
-    	
+
     	//LineChart Center
     	LineChart<String, Number> lineChart = ChartLoader.loadTemperatureChart(f);
     	lineChart.setPrefSize(500, 300);
     	lineChart.setMinSize(400, 200);
     	lineChart.setMaxSize(600, 400);
-    	
+
     	//TableView Center
         // TODO fill table
     	final TableView<String> table = new TableView<String>();
     	table.setEditable(false);
-    	table.setPrefSize(400, 300);
-    	table.setMinSize(200, 200);
-    	table.setMaxSize(400, 400);
-    	
+    	table.setPrefSize(500, 300);
+    	table.setMinSize(400, 200);
+    	table.setMaxSize(600, 400);
+
         TableColumn<String, String> description = new TableColumn<String, String>("Parameter");
         TableColumn<String, String> number = new TableColumn<String, String>("Amount/Number");
         //Change width
@@ -110,9 +114,9 @@ public class Main extends Application {
         //Icon
         //TODO center image in quadrant
         hbox = new HBox();
-        hbox.setPrefSize(400, 300);
-        hbox.setMinSize(200, 200);
-        hbox.setMaxSize(400, 400);
+        hbox.setPrefSize(500, 300);
+        hbox.setMinSize(400, 200);
+        hbox.setMaxSize(600, 400);
         hbox.setAlignment(Pos.CENTER);
         Image image = new Image ("http://openweathermap.org/img/w/" + f.getWeather().get(0).getId() + ".png");
         ImageView img = new ImageView();
