@@ -1,5 +1,6 @@
 import javafx.application.Application;
 import javafx.application.Platform;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.chart.BarChart;
 import javafx.scene.chart.LineChart;
@@ -11,6 +12,8 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.FlowPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -53,8 +56,8 @@ public class Main extends Application {
             alert.showAndWait();
             Platform.exit();
         }
-		// TODO fill table
-		stage.setTitle("Weather Forecast for Bern");
+
+		stage.setTitle("Weather Forecast");
 		
     	BorderPane root = new BorderPane();
 
@@ -64,8 +67,12 @@ public class Main extends Application {
     	root.setBottom(new Label("Created by Lorenz Rasch & Nicole Scheffel"));
 
     	//Top
-        // TODO center text, make Text bigger
-        root.setTop(new Label("Current Weather for Bern, Switzerland"));
+        Label top = new Label("Current Weather for Bern, Switzerland");
+        top.setFont(new Font(32));
+        HBox hbox = new HBox();
+        hbox.setAlignment(Pos.CENTER);
+        hbox.getChildren().add(top);
+        root.setTop(hbox);
 /*  	
    		final ScrollBar sc = new ScrollBar();
         sc.setLayoutX(scene.getWidth()-sc.getWidth());
@@ -92,6 +99,7 @@ public class Main extends Application {
     	lineChart.setMaxSize(600, 400);
     	
     	//TableView Center
+        // TODO fill table
     	final TableView<String> table = new TableView<String>();
     	table.setEditable(false);
     	table.setPrefSize(400, 300);
