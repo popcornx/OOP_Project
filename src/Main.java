@@ -26,11 +26,9 @@ import java.util.List;
 public class Main extends Application {
 
 	private Forecast f;
-	private final static List<OWMCity> cityList = Arrays.asList(OWMCity.values());
 
 	@Override public void start(Stage stage) throws Exception{
 		// TODO change to one city, load at start of program
-		// TODO remove OWMCity
 		// TODO fill table
 		// TODO get icons
 		// TODO exception handling
@@ -82,11 +80,6 @@ public class Main extends Application {
     	HBox hboxTop = new HBox();
     	root.setTop(hboxTop);
         hboxTop.setAlignment(Pos.CENTER);
-
-		ChoiceBox<OWMCity> choiceBox = new ChoiceBox<OWMCity>(FXCollections.observableArrayList(cityList));
-        //Set a default value
-        choiceBox.setValue(OWMCity.BERN);
-        hboxTop.getChildren().add(choiceBox);
         
         stage.setScene(scene);
         stage.show();
